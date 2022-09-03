@@ -1,0 +1,108 @@
+﻿@using X.PagedList;
+@using X.PagedList.Mvc.Core;
+@model IPagedList<LibraryTestApp.Models.BookModel>
+
+<!-- View for listing all books-->
+<table class="table" id="tbl_Books">
+    <thead>
+        <tr>
+            <th style="text-align:center">
+                Book Name
+            </th>
+            <th>
+                Image
+            </th>
+            <th>
+                Author
+            </th>
+            <th>
+                Created Time
+            </th>
+            <th>
+                Borrowed Time
+            </th>
+            <th>
+                Borrowed by
+            </th>
+            <th>
+                Bring Back Time
+            </th>
+            <th>
+                Takeback Time
+            </th>
+            <th>
+                Is in Library?
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BookName)
+                </td>
+                <td>
+                    <img src="@("~/Images/"+item.BookImage)" class="img-thumbnail" height="100" width="100" asp-append-version="true" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AuthorName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LoanedDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TakenName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BringBackTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TakeBackDate)
+                </td>
+
+                <td>
+                    @if (item.InLibrary)
+                    {
+                        <span>Yes</span>
+                    }
+                    else
+                    {
+                        <span>No</span>
+                    }
+                </td>
+                <td>
+                    @if (item.LoanedDate == null)
+                    {
+                        <a href="/Book/BorrowBook/@item.BookId" class="btn btn-info">Borrow</a>
+                    }
+                    else
+                    {
+                        <a href="/Book/BorrowBook/@item.BookId" class="btn btn-info" style="pointer-events: none">Borrow</a>
+                    }
+                </td>
+                <td>
+                    @if (item.LoanedDate != null)
+                    {
+                        <a href="/Book/TakeBackBook/@item.BookId" class="btn btn-success btn-outline-light">TakeBack</a>
+                    }
+                    else
+                    {
+                        <a href="/Book/TakeBackBook/@item.BookId" class="btn btn-success btn-outline-light" style="pointer-events: none">TakeBack</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+</br>
+@Html.PagedListPager((IPagedList)Model, page => Url.Action("GetAllBooks", new { page }),
+    new X.PagedList.Web.Common.PagedListRenderOptions
+    {
+        LiElementClasses = new string[] { "page-item" },
+        PageClasses = new string[] { "page-link" }
+    })

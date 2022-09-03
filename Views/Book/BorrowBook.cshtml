@@ -1,0 +1,80 @@
+﻿@model LibraryTestApp.Models.BookModel
+
+<h4>BookModel</h4>
+<hr />
+
+
+<!-- View for borrowing a book -->
+<div class="card">
+    <div class="card-body">
+        <form asp-action="EditBookDetail" enctype="multipart/form-data">
+            <input type="hidden" asp-for="BookId" />
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="BookName" class="control-label">Name of the Book</label>
+                        <input asp-for="BookName" class="form-control" readonly />
+                        <span asp-validation-for="BookName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="BookImage" class="control-label">Path of the Book Image</label>
+                        <input asp-for="BookImage" class="form-control" readonly />
+                        <span asp-validation-for="BookImage" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="AuthorName" class="control-label">Author of the Book</label>
+                        <input asp-for="AuthorName" class="form-control" readonly />
+                        <span asp-validation-for="AuthorName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="CreatedDate" class="control-label">Added Time</label>
+                        <input asp-for="CreatedDate" class="form-control" readonly />
+                        <span asp-validation-for="CreatedDate" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="LoanedDate" class="control-label"> Borrowed Time</label>
+                        <input asp-for="LoanedDate" class="form-control" />
+                        <span asp-validation-for="LoanedDate" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="TakenName" class="control-label">Borrowed By</label>
+                        <input asp-for="TakenName" class="form-control" />
+                        <span asp-validation-for="TakenName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="BringBackTime" class="control-label">Bring back time</label>
+                        <input asp-for="BringBackTime" class="form-control" />
+                        <span asp-validation-for="BringBackTime" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-sm btn-info rounded-0"><i class="fa fa-pencil-alt"></i> Borrow</button>
+                <a asp-action="GetAllBooks" class="btn btn-sm btn-primary rounded-0"><i class="fas fa-fast-backward"></i> Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

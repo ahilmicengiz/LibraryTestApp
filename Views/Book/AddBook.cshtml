@@ -1,0 +1,53 @@
+﻿@model LibraryTestApp.ViewModels.BookImageViewModel
+
+<h4>Add a book</h4>
+<hr />
+
+<!-- View for adding a book -->
+<div class="card">
+   
+    <div class="card-body">
+        <form asp-action="AddBook" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="BookName" class="control-label">Name of the Book</label>
+                        <input asp-for="BookName" class="form-control" />
+                        <span asp-validation-for="BookName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="ImageFile" class="control-label">Image of the Book</label>
+                        <div class="custom-file">
+                            <input asp-for="ImageFile" class="custom-file-input" accept="images/*"/>
+                            <label class="custom-file-label" for="customFile">Choose image</label>
+                        </div>
+                        <span asp-validation-for="ImageFile" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="AuthorName" class="control-label">Author of the Book</label>
+                        <input asp-for="AuthorName" class="form-control" />
+                        <span asp-validation-for="AuthorName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                   
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <input type="submit" value="Add Book" class="btn btn-sm btn-info rounded-0" />
+                <a asp-action="GetAllBooks" class="btn btn-sm btn-primary rounded-0">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
