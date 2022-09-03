@@ -18,7 +18,7 @@ namespace LibraryTestApp.Repository
         //To Handle connection related activities      
         private void DatabaseConnection()
         {
-            con = new SqlConnection("Data Source = (localdb)\\ogrencitakip ; Initial Catalog = dbo.Library; Integrated Security = True;");//database information string
+            con = new SqlConnection("Data Source =**add here server information ; Initial Catalog =**add here database information; Integrated Security = True;");//database information string (Must add information of sql server and database
         }
         //To add book with details      
         public void AddBook(BookModel objBook)
